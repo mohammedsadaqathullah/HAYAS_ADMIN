@@ -3,8 +3,6 @@ import { useSendOtpMutation, useVerifyOtpMutation } from '../services/reduxApi';
 import { useAuth } from '../context/AuthContext';
 import '../styles.css';
 import { useNavigate } from 'react-router-dom';
-import { useGetAdminUserByEmailQuery } from '../store/slices/authApi';
-import { skipToken } from '@reduxjs/toolkit/query';
 
 const LoginPage: React.FC = () => {
   const [step, setStep] = useState(1);

@@ -111,7 +111,7 @@ const WithdrawalsPage: React.FC = () => {
       setCurrentPage(2)
       setHasMoreWithdrawals(filteredWithdrawals.length > ITEMS_PER_PAGE)
     }
-  }, [searchTerm, activeTab, withdrawals])
+  }, [searchTerm, activeTab, withdrawals, filteredWithdrawals])
 
   // Scroll event handler with throttling
   const handleScroll = useCallback(() => {

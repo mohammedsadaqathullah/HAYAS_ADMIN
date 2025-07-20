@@ -61,7 +61,7 @@ const UsersPage: React.FC = () => {
   const [createUser, { isLoading: creating }] = useCreateUserMutation()
   const [updateUser, { isLoading: updating }] = useUpdateUserMutation()
   const [deleteUser, { isLoading: deleting }] = useDeleteUserMutation()
-  const { data: userDetails, refetch: refetchDetails } = useGetUserByEmailQuery(selectedEmail, {
+  const { data: userDetails } = useGetUserByEmailQuery(selectedEmail, {
     skip: !selectedEmail,
   })
 
@@ -120,7 +120,7 @@ const UsersPage: React.FC = () => {
       setCurrentPage(2)
       setHasMoreUsers(filteredUsers.length > ITEMS_PER_PAGE)
     }
-  }, [searchTerm, users])
+  }, [filteredUsers])
 
   // Scroll event handler with throttling
   const handleScroll = useCallback(() => {

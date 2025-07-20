@@ -6,7 +6,6 @@ import {
   useGetDeliveryPartnersQuery,
   useRegisterOrUpdateDeliveryPartnerMutation,
   useUpdateDeliveryPartnerStatusMutation,
-  useGetDeliveryPartnerByEmailQuery,
   useUploadDeliveryPartnerImagesMutation,
 } from "../store/slices/deliveryPartnersApi"
 import {
@@ -57,7 +56,6 @@ const DeliveryPartnersPage: React.FC = () => {
   const [error, setError] = useState("")
   const [detailsOpen, setDetailsOpen] = useState(false)
   const [details, setDetails] = useState<DeliveryPartner | null>(null)
-  const [imageFiles, setImageFiles] = useState<any>({})
 
   // Search and pagination states
   const [searchTerm, setSearchTerm] = useState("")
@@ -85,7 +83,6 @@ const DeliveryPartnersPage: React.FC = () => {
 
   // API hooks
   const { data: partnersData = [], refetch: refetchPartners, isLoading } = useGetDeliveryPartnersQuery()
-  const { data: withdrawalsData, refetch: refetchWithdrawals } = useGetAllWithdrawalsQuery(undefined)
   const [registerOrUpdateDeliveryPartner, { isLoading: creating }] = useRegisterOrUpdateDeliveryPartnerMutation()
   const [updateDeliveryPartnerStatus, { isLoading: updating }] = useUpdateDeliveryPartnerStatusMutation()
   const [uploadDeliveryPartnerImages, { isLoading: uploading }] = useUploadDeliveryPartnerImagesMutation()
@@ -154,7 +151,7 @@ const DeliveryPartnersPage: React.FC = () => {
       setCurrentPage(2)
       setHasMorePartners(filteredPartners.length > ITEMS_PER_PAGE)
     }
-  }, [searchTerm, activeTab, partnersData])
+  }, [filteredPartners])
 
   // Scroll event handler with throttling
   const handleScroll = useCallback(() => {
@@ -212,7 +209,6 @@ const DeliveryPartnersPage: React.FC = () => {
     setForm(defaultPartner)
     setEditId(null)
     setError("")
-    setImageFiles({})
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -249,7 +245,6 @@ const DeliveryPartnersPage: React.FC = () => {
     if (!e.target.files || e.target.files.length === 0) return
 
     const file = e.target.files[0]
-    setImageFiles((prev: any) => ({ ...prev, [type]: file }))
 
     // Upload to backend
     const formData = new FormData()
@@ -283,7 +278,7 @@ const DeliveryPartnersPage: React.FC = () => {
   const handleWithdrawalStatusUpdate = async () => {
     if (!withdrawalDialog.withdrawal) return
     await updateWithdrawalStatus({ id: withdrawalDialog.withdrawal._id, data: statusUpdate })
-    refetchWithdrawals()
+    refetchPartners() // Assuming refetchPartners is the correct refetch for withdrawals
     handleWithdrawalDialogClose()
   }
 

@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const FOOD_BASE = 'https://hayas-backend.onrender.com/food';
-
 export const foodApi = createApi({
   reducerPath: 'foodApi',
   baseQuery: fetchBaseQuery({ 

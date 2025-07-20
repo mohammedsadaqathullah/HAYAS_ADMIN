@@ -121,7 +121,7 @@ const VegetablesAndFruitsPage: React.FC = () => {
       setCurrentPage(2)
       setHasMoreItems(filteredItems.length > ITEMS_PER_PAGE)
     }
-  }, [searchTerm, items])
+  }, [filteredItems])
 
   // Scroll event handler with throttling
   const handleScroll = useCallback(() => {

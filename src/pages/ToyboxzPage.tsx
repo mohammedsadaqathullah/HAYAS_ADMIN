@@ -121,7 +121,7 @@ const ToyboxzPage: React.FC = () => {
       setCurrentPage(2)
       setHasMoreToyboxz(filteredToyboxz.length > ITEMS_PER_PAGE)
     }
-  }, [searchTerm, toyboxz])
+  }, [searchTerm, toyboxz, filteredToyboxz])
 
   // Scroll event handler with throttling
   const handleScroll = useCallback(() => {
