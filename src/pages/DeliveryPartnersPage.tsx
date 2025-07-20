@@ -9,7 +9,6 @@ import {
   useUploadDeliveryPartnerImagesMutation,
 } from "../store/slices/deliveryPartnersApi"
 import {
-  useGetAllWithdrawalsQuery,
   useUpdateWithdrawalStatusMutation,
 } from "../store/slices/withdrawalsApi"
 import '../styles/deliveryPartners.css'

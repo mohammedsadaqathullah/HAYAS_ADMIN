@@ -15,7 +15,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [email, setEmail] = useState<string | null>(null);
   const [getAdminUserByEmail] = useLazyGetAdminUserByEmailQuery(); // 🌀 Lazy query
 
-  const login = async (email: string) => {
+  const login = React.useCallback(async (email: string) => {
     try {
       const res = await getAdminUserByEmail(email)
       console.log('admin', res)
@@ -25,7 +25,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch (err) {
       console.log('erroronLogin', err)
     }
-  };
+  }, [getAdminUserByEmail]);
 
   useEffect(() => {
     const storedEmail = localStorage.getItem('email');
