@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 import { useState, useEffect } from "react"
 import { useGetOrdersQuery, useUpdateOrderStatusMutation, useDeleteOrderMutation } from "../services/reduxApi"
 import '../styles/orderPage.css'
@@ -71,7 +71,7 @@ const OrdersPage: React.FC = () => {
   }
 
   // Load more orders function
-  const loadMoreOrders = async () => {
+  const loadMoreOrders = React.useCallback(async () => {
     if (loadingMoreOrders || !hasMoreOrders) return
 
     setLoadingMoreOrders(true)
@@ -97,7 +97,7 @@ const OrdersPage: React.FC = () => {
     }
 
     setLoadingMoreOrders(false)
-  }
+  }, [loadingMoreOrders, hasMoreOrders, orderPage, orders, search]);
 
   // Add useEffect for infinite scroll
   useEffect(() => {

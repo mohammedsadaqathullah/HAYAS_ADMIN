@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 import { useState, useEffect } from "react"
 import {
   useGetUserByEmailQuery,
@@ -48,7 +48,7 @@ const UserOrderLookupPage: React.FC = () => {
   const [deleteOrder, { isLoading: deletingOrder }] = useDeleteOrderMutation()
 
   // Load more users function
-  const loadMoreUsers = async () => {
+  const loadMoreUsers = React.useCallback(async () => {
     if (loadingMoreUsers || !hasMoreUsers) return
 
     setLoadingMoreUsers(true)
@@ -67,7 +67,7 @@ const UserOrderLookupPage: React.FC = () => {
     }
 
     setLoadingMoreUsers(false)
-  }
+  }, [loadingMoreUsers, hasMoreUsers, userPage, allUsers]);
 
   // Add useEffect for infinite scroll
   useEffect(() => {
