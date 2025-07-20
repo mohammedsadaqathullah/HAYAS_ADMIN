@@ -47,23 +47,6 @@ const UserOrderLookupPage: React.FC = () => {
   const [updateOrderStatus, { isLoading: updatingOrder }] = useUpdateOrderStatusMutation()
   const [deleteOrder, { isLoading: deletingOrder }] = useDeleteOrderMutation()
 
-  // Add useEffect for infinite scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight ||
-        loadingMoreUsers ||
-        !hasMoreUsers
-      ) {
-        return
-      }
-      loadMoreUsers()
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [loadingMoreUsers, hasMoreUsers])
-
   // Load more users function
   const loadMoreUsers = async () => {
     if (loadingMoreUsers || !hasMoreUsers) return
@@ -85,6 +68,23 @@ const UserOrderLookupPage: React.FC = () => {
 
     setLoadingMoreUsers(false)
   }
+
+  // Add useEffect for infinite scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight ||
+        loadingMoreUsers ||
+        !hasMoreUsers
+      ) {
+        return
+      }
+      loadMoreUsers()
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [loadingMoreUsers, hasMoreUsers, loadMoreUsers])
 
   // Initialize displayed users
   useEffect(() => {

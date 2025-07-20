@@ -70,23 +70,6 @@ const OrdersPage: React.FC = () => {
     }
   }
 
-  // Add useEffect for infinite scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight ||
-        loadingMoreOrders ||
-        !hasMoreOrders
-      ) {
-        return
-      }
-      loadMoreOrders()
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [loadingMoreOrders, hasMoreOrders])
-
   // Load more orders function
   const loadMoreOrders = async () => {
     if (loadingMoreOrders || !hasMoreOrders) return
@@ -115,6 +98,23 @@ const OrdersPage: React.FC = () => {
 
     setLoadingMoreOrders(false)
   }
+
+  // Add useEffect for infinite scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight ||
+        loadingMoreOrders ||
+        !hasMoreOrders
+      ) {
+        return
+      }
+      loadMoreOrders()
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [loadingMoreOrders, hasMoreOrders, loadMoreOrders])
 
   // Initialize and update displayed orders when search changes
   useEffect(() => {

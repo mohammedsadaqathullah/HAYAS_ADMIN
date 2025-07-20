@@ -261,11 +261,6 @@ const DeliveryPartnersPage: React.FC = () => {
   }
 
   // Withdrawal handlers
-  const handleWithdrawalDialogOpen = (withdrawal: any) => {
-    setWithdrawalDialog({ open: true, withdrawal })
-    setStatusUpdate({ status: withdrawal.status, remarks: withdrawal.remarks || "" })
-  }
-
   const handleWithdrawalDialogClose = () => {
     setWithdrawalDialog({ open: false, withdrawal: null })
   }

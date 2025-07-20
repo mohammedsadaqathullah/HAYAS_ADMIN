@@ -220,7 +220,7 @@ const Dashboard: React.FC = () => {
         recentWithdrawals,
       })
     }
-  }, [users, orders, partners, foods, groceries, toyboxz, vegFruits, withdrawals]);
+  }, [users, orders, partners, foods, groceries, toyboxz, vegFruits, withdrawals, loading]);
 
   return (
     <div className="dashboard-management">
